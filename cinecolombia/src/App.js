@@ -7,7 +7,7 @@ const API_URL = 'http://www.omdbapi.com?apiKey=1e6222ad';
 
 const App = () => {
   const [movies, setMovies] = useState([]);
-
+  const [busquedaParam, setBusquedaParam] = useState('')
   const buscadorCine = async (titulo) => {
     const response = await fetch(`${API_URL}&s=${titulo}`);
     const data = await response.json();
@@ -15,7 +15,7 @@ const App = () => {
   };
 
   useEffect(() => {
-    buscadorCine('Spiderman');
+    buscadorCine('Jason Bourne');
   }, []);
 
   return (
@@ -24,13 +24,13 @@ const App = () => {
       <div className='busqueda'>
         <input
           placeholder="Buscador de Peliculas"
-          value='Spiderman'
-          onChange={() => {}}
+          value= {busquedaParam}
+          onChange = {(e)=>setBusquedaParam(e.target.value)}
         />
         <img
           src={buscadorIcono}
           alt='Buscar'
-          onClick={() => {}}
+          onClick={() => buscadorCine(busquedaParam)}
         />
       </div>
 
